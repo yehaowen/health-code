@@ -51,11 +51,13 @@ CREATE TABLE vd(
 
 	vtime VARCHAR(64) NOT NULL COMMENT '接种时间',
 
-	vplace VARCHAR(64) NOT NULL COMMENT '接种地点'
+	vplace VARCHAR(64) NOT NULL COMMENT '接种地点',
+
+	vID_ VARCHAR(64) NOT NULL UNIQUE COMMENT '身份证'
  
 );
 
-INSERT INTO vd VALUES(NULL,'新冠Vero(科兴中维)','2021-3-3','重庆市\北碚区');
+INSERT INTO vd VALUES(NULL,'新冠Vero(科兴中维)','2021-3-3','重庆市\北碚区','500109199308300011');
 
 
 #创建填写信息表 healthInfo
@@ -138,22 +140,20 @@ hspm5  INT NOT NULL COMMENT '其它症状',
 
 hspm50 VARCHAR(64) COMMENT '其它症状简述',
 
-vdId INT NOT NULL COMMENT 'vd表关联',
 
-FOREIGN KEY (vdId) REFERENCES vd(vid)
+
+FOREIGN KEY (hphone) REFERENCES user(uphone)
 
 ON UPDATE CASCADE,
 
-userId INT NOT NULL COMMENT 'user表关联',
-
-FOREIGN KEY (userId) REFERENCES user(uid)
+FOREIGN KEY (hID_) REFERENCES vd(vID_)
 
 ON UPDATE CASCADE
 ) ;
 
 #插入数据到healthInfo
 
-INSERT INTO healthInfo VALUES (NULL,'李冬冬','13983111501','身份证','500109199308300011',1,'1993-9-4','中国大陆','重庆市','重庆','重庆','xx区xx路xx街道','重庆市xx区',1,1,0,0,0,0,0,null,0,0,0,0,null,null,0,0,0,0,0,0,0,0,0,0,null,1,1);
+INSERT INTO healthInfo VALUES (NULL,'李冬冬','13983111501','身份证','500109199308300011',1,'1993-9-4','中国大陆','重庆市','重庆','重庆','xx区xx路xx街道','重庆市xx区',1,1,0,0,0,0,0,null,0,0,0,0,null,null,0,0,0,0,0,0,0,0,0,0,null);
 
 
 
