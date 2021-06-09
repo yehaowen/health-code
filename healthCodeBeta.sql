@@ -118,7 +118,7 @@ hspm0  INT COMMENT '自觉正常',
 
 hspm1  INT COMMENT '发热37.3以下',
 
-hspm2  INT COMMENT '/发热37.3以上',
+hspm2  INT COMMENT '发热37.3以上',
 
 hspm3  INT COMMENT '干咳',
 
@@ -126,15 +126,7 @@ hspm4  INT COMMENT '乏力',
 
 hspm5  INT COMMENT '其它症状',
 
-hspm50 VARCHAR(64) COMMENT '其它症状简述',
-
-FOREIGN KEY (hphone) REFERENCES user(uphone)
-
-ON UPDATE CASCADE,
-
-FOREIGN KEY (hID_) REFERENCES vd(vID_)
-
-ON UPDATE CASCADE
+hspm50 VARCHAR(64) COMMENT '其它症状简述'
 ) ;
 
 #插入数据到healthInfo
