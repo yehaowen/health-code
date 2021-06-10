@@ -1,21 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Addinf from '../views/Addinf.vue'
 
-import Register from '../views/Register.vue'
+import Addinf from '../views/Addinf.vue'
+import Detailed from '../views/Detailed.vue'
 import Login from '../views/Login.vue'
-import Me from '../views/Me.vue'
-import Article from '../views/Article.vue'
-import Verification from '../views/Verification.vue'
+import Mypart from '../views/Mypart.vue'
+import Register from '../views/Register.vue'
 import Success from '../views/Success.vue'
+import Verification from '../views/Verification.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/addinf',
     name: 'Addinf',
     component: Addinf
+  },
+  {
+    path: '/detailed',
+    name: 'Detailed',
+    component: Detailed
   },
   {
     path: '/login',
@@ -23,22 +28,25 @@ const routes = [
     component: Login
   },
   {
+    path: '/mypart',
+    name: 'Mypart',
+    component: Mypart
+  },
+  {
     path: '/register',
     name: 'Register',
     component: Register
   },
- 
+  {
+    path: '/success',
+    name: 'Success',
+    component: Success
+  },
   {
     path: '/verification',
     name: 'Verification',
     component: Verification
-  },
-  {
-    path: '/success',
-    name: 'Success',
-    component: Verification
   }
-
 ]
 
 const router = new VueRouter({

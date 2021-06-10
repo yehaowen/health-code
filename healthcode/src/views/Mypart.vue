@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="absolute"><img src="安全盾牌1.png" alt=""> <div class="num"> 
+        <div class="absolute"><img src="../assets/yimiao.png" alt=""> <div class="num"> 
             <span>{{arr[0]}}</span> <span>{{arr[1]}}</span>
              </div>  </div>
         <div class="top">
@@ -10,7 +10,7 @@
         </div>
         <div class="mid">
             <span class="update" >更新于：{{Time}}</span>
-            <span class="submit"> 立即上报  <a>  <img class="back" src="_返回.png" alt=""></a></span>
+            <span class="submit"> 立即上报  <a>  <img class="back" src="../assets/leftback.png" alt=""></a></span>
         </div>
         <div class="bottom ">
             <div class="bm1 clearfix">
@@ -18,11 +18,11 @@
                 <span class="bm1-2"> <strong>无异常</strong> </span> 
             </div>
             <div class="bm2 ">
-            <div class="bm2-1"><img src="位置.png" alt=""><span> 行程信息</span><button class="btn-t">核验行程</button></div>
+            <div class="bm2-1"><img src="../assets/gps.png" alt=""><span> 行程信息</span><button class="btn-t">核验行程</button></div>
             <h6>14天内未到访到过中高风险地区所在城市</h6>           
             </div>
             <div class="bm3">
-                <img src="针管.png" alt=""> <span>已接种新冠疫苗2剂（共2剂）</span> <a><img class='back' src="向右_返回.png" alt=""></a> 
+                <img src="../assets/zhen.png" alt=""> <span>已接种新冠疫苗2剂（共2剂）</span> <a><img class='back' src="../assets/rightback.png" alt=""></a> 
             </div>
         </div>
     </div>

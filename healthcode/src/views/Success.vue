@@ -7,7 +7,7 @@
                 </router-link>
             </mt-header>
             <div>
-                <img src="../views/success.png" alt=""><h1>提交成功</h1>
+                <img src="../assets/success.png" alt=""><h1>提交成功</h1>
                 您已经成功提交，可立即生成渝康码
             </div>
             <el-button type="primary">立即生成渝康码</el-button>
