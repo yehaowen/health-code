@@ -213,12 +213,14 @@
         v-model="checkbox__symptom__items__value"
         checked-color="#26a2ff"
       >
-        <van-checkbox name="1" @click="symptom">自觉正常</van-checkbox>
-        <van-checkbox name="2" @click="symptom">发热37.3℃以下</van-checkbox>
-        <van-checkbox name="3" @click="symptom">发热37.3℃(含)以上</van-checkbox>
-        <van-checkbox name="4" @click="symptom">干咳</van-checkbox>
-        <van-checkbox name="5" @click="symptom">乏力</van-checkbox>
-        <van-checkbox name="6" @click="symptom">其他症状</van-checkbox>
+        <van-checkbox name="1" @click="symptom1">自觉正常</van-checkbox>
+        <van-checkbox name="2" @click="symptom2">发热37.3℃以下</van-checkbox>
+        <van-checkbox name="3" @click="symptom3"
+          >发热37.3℃(含)以上</van-checkbox
+        >
+        <van-checkbox name="4" @click="symptom4">干咳</van-checkbox>
+        <van-checkbox name="5" @click="symptom4">乏力</van-checkbox>
+        <van-checkbox name="6" @click="symptom4">其他症状</van-checkbox>
       </van-checkbox-group>
       <div>
         <p>其他症状</p>
@@ -379,9 +381,9 @@ export default {
       this.cityTypeVal = values[0];
     },
     // 症状检查
-    symptom() {
+    // 有1 不能有23456
+    symptom1() {
       var item1 = this.checkbox__symptom__items__value.indexOf("1");
-      // 有1 不能有23456
       if (item1 > -1) {
         var item2 = this.checkbox__symptom__items__value.indexOf("2");
         if (item2 > -1) {
@@ -404,23 +406,40 @@ export default {
           this.checkbox__symptom__items__value.splice(item6, 1);
         }
       }
-      // 有2 不能有13
+    },
+    // 有2 不能有13
+    symptom2() {
+      var item2 = this.checkbox__symptom__items__value.indexOf("2");
       if (item2 > -1) {
+        var item1 = this.checkbox__symptom__items__value.indexOf("1");
         if (item1 > -1) {
           this.checkbox__symptom__items__value.splice(item1, 1);
         }
+        var item3 = this.checkbox__symptom__items__value.indexOf("3");
         if (item3 > -1) {
           this.checkbox__symptom__items__value.splice(item3, 1);
         }
       }
-      // 有3 不能有12
+    },
+    // 有3 不能有12
+    symptom3() {
+      var item3 = this.checkbox__symptom__items__value.indexOf("3");
       if (item3 > -1) {
+        var item1 = this.checkbox__symptom__items__value.indexOf("1");
         if (item1 > -1) {
           this.checkbox__symptom__items__value.splice(item1, 1);
         }
+        var item2 = this.checkbox__symptom__items__value.indexOf("2");
         if (item2 > -1) {
           this.checkbox__symptom__items__value.splice(item2, 1);
         }
+      }
+    },
+    // 有4 5 6 不能有1
+    symptom4() {
+      var item1 = this.checkbox__symptom__items__value.indexOf("1");
+      if (item1 > -1) {
+        this.checkbox__symptom__items__value.splice(item1, 1);
       }
     },
     // check最终检查
@@ -433,10 +452,11 @@ export default {
         this.field__user__items.hra &&
         this.field__user__items.hda &&
         this.radio__often__items.value &&
-        this.radio__recent__items.value
+        this.radio__recent__items.value&&
+        this.checkbox__symptom__items__value
         // &&this.
       ) {
-        alert("succeed!");
+        alert("填报成功!");
       } else {
         alert("必填项没有填写完全!");
       }
