@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Addinf from '../views/Addinf.vue'
-import Detailed from '../views/Detailed.vue'
 import Login from '../views/Login.vue'
+import Home from '../views/Home.vue'
 import Mypart from '../views/Mypart.vue'
 import Register from '../views/Register.vue'
 import Success from '../views/Success.vue'
@@ -11,7 +11,7 @@ import Verification from '../views/Verification.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
+const routes = [ 
   {
     path: '/addinf',
     name: 'Addinf',
@@ -21,6 +21,11 @@ const routes = [
     path: '/detailed',
     name: 'Detailed',
     component: Detailed
+  },
+		{
+    path: '/home',
+    name: 'Home',
+    component: Home
   },
   {
     path: '/login',
