@@ -20,26 +20,32 @@ CREATE TABLE user(
 
 	uname VARCHAR(64) COMMENT '昵称',
 
+	urlname VARCHAR(64) COMMENT '真实姓名',
+
 	upwd VARCHAR(64) COMMENT '密码',
 
-	uphone VARCHAR(64) UNIQUE COMMENT '手机号 唯一',
+	uID_ VARCHAR(64) COMMENT '身份证号 唯一',
 
-	ucountry VARCHAR(64) COMMENT '国家/地区'
+	uphone VARCHAR(64) COMMENT '手机号 唯一',
+
+	ucountry VARCHAR(64) COMMENT '国家/地区',
+
+	avatar VARCHAR(50)  DEFAULT 'unnamed.jpg' COMMENT '用户头像'
 
 );
 
 #插入数据到user
 INSERT INTO user VALUES 
 
-(NULL,'csl','123456','13983111501','中国'),
+(NULL,'csl','陈苏伦','123456','500109199308300011','13983111501','中国','00adca5a0d93daa80121985c9ef05f.jpg'),
 
-(NULL,'yhw','123456','13983111502','中国'),
+(NULL,'yhw','叶豪文','123456','500109199308300012','13983111502','中国',DEFAULT),
 
-(NULL,'lyh','123456','13983111503','中国'),
+(NULL,'lyh','李艺涵','123456','500109199308300013','13983111503','中国',DEFAULT),
 
-(NULL,'zzh','123456','13983111504','中国'),
+(NULL,'zzh','周梓涵','123456','500109199308300014','13983111504','中国',DEFAULT),
 
-(NULL,'hsy','123456','13983111505','中国');
+(NULL,'hsy','黄申禹','123456','500109199308300015','13983111505','中国',DEFAULT);
 
 
 #创建接种详情页 vd 
@@ -53,7 +59,7 @@ CREATE TABLE vd(
 
 	vplace VARCHAR(64) COMMENT '接种地点',
 
-	vID_ VARCHAR(64) UNIQUE COMMENT '身份证'
+	vID_ VARCHAR(64) COMMENT '身份证号'
  
 );
 
@@ -68,11 +74,11 @@ hid INT PRIMARY KEY AUTO_INCREMENT,
 
 hname VARCHAR(64) COMMENT '真实姓名',
 
-hphone VARCHAR(64) UNIQUE COMMENT '手机号',
+hphone VARCHAR(64) COMMENT '手机号',
 
 hIDtype VARCHAR(64) COMMENT '证件类型',
 
-hID_ VARCHAR(64) UNIQUE COMMENT '证件号',
+hID_ VARCHAR(64) COMMENT '证件号',
 
 hsex INT COMMENT '性别',
 
