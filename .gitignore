@@ -1,4 +1,8 @@
 *.doc
 node_modules
 *.txt
+<<<<<<< HEAD
 sever
+=======
+serverBeta
+>>>>>>> csl
