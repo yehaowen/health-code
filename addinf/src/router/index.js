@@ -1,12 +1,15 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import Addinf from '../views/Addinf.vue'
-<<<<<<< HEAD
+import Home from '../views/Home.vue'
+
+//<<<<<<< HEAD
 import { Button } from 'mint-ui';
 import { Popup } from 'vant';   //弹出框
-=======
+//=======
 
->>>>>>> csl
+//>>>>>>> csl
 
 Vue.use(VueRouter)
 Vue.use(Vuex);
@@ -18,14 +21,14 @@ const routes = [
     path: '/',
     name: 'Addinf',
     component: Addinf
-<<<<<<< HEAD
+//<<<<<<< HEAD
   },
   {
       path: '/home',
       name: 'Home',
       component: Home
-=======
->>>>>>> csl
+//=======
+//>>>>>>> csl
   }
 ]
 
