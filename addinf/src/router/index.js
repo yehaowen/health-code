@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Addinf from '../views/Addinf.vue'
+<<<<<<< HEAD
 import Yimiao from '../views/Yimiao.vue'
 import { Button } from 'mint-ui';
 import { Popup } from 'vant';   //弹出框
+=======
+
+>>>>>>> csl
 
 Vue.use(VueRouter)
 Vue.use(Vuex);
@@ -15,6 +19,7 @@ const routes = [
     path: '/',
     name: 'Addinf',
     component: Addinf
+<<<<<<< HEAD
   },
   {
     path: '/yimiao',
@@ -25,6 +30,8 @@ const routes = [
       path: '/home',
       name: 'Home',
       component: Home
+=======
+>>>>>>> csl
   }
 ]
 
