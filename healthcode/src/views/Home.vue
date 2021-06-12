@@ -1,5 +1,5 @@
 <template>
-<<<<<<< HEAD
+
   <div class="homeLogin">
     <!-- 身份卡片图 -->
     <div class="idCard">
@@ -11,7 +11,7 @@
     <!-- 身份卡片图 -->
     <div class="idCard">
       <img src="../assets/register.png" width="33%">
->>>>>>> lh
+
     </div>
     <!-- 登录按钮 -->
     <div class="btn">
@@ -20,17 +20,17 @@
       @click.native="login"
       >登录</mt-button>
     </div>
-<<<<<<< HEAD
+
        
        <!--  -->
     <van-cell is-link @click="showPopup">展示弹出层</van-cell>
     <van-popup v-model="show">内容</van-popup>
   </div>
-=======
+
       <div style="display:none;" class="user-login" id="user-login"></div>
   </div>
 </div>
->>>>>>> lh
+
 </template>
 
 <style scoped>
@@ -47,10 +47,6 @@
   height: 30%; */
   background-color: black;
   position: absolute;
-<<<<<<< HEAD
-  
-  }
-=======
 }
 .user{
   text-align: center;
@@ -62,16 +58,16 @@
   /* position: absolute; */
   /* background-color: red; */
 }
->>>>>>> lh
+
 </style>
 
 <script>
 // 引入弹出提示框
 import { MessageBox } from 'mint-ui';
-<<<<<<< HEAD
-=======
+
+
 import { Toast } from 'mint-ui';
->>>>>>> lh
+
 
 export default {
   data() {
@@ -79,26 +75,18 @@ export default {
       // 弹出提示框内容
       title: '请先进行登录',
       message: '温馨提示',
-<<<<<<< HEAD
       show: false,
-=======
       use_phone_num: '',
->>>>>>> lh
       
     }
   },
  
   methods: {
-<<<<<<< HEAD
     showPopup() {
       this.show = true;
     },
     //点击登录后拉取个人信息
-    login(){
-      //弹出对话框
       
-=======
-    
     login(){
       //弹出对话框
       MessageBox.prompt('请输入手机号').then(({ value, action }) => {
@@ -129,22 +117,22 @@ export default {
         }else{
           Toast('手机号码错误,请重新填写'); 
         }
-      });
->>>>>>> lh
+      })
     }
+    
   },
 
   mounted() {
-<<<<<<< HEAD
+
     
     //第一次登入 弹出 "温馨提示"
     MessageBox.alert( this.title, this.message );
     // this.axios.get("/category").then((result) => {
     // });
-=======
+
     //第一次登入 弹出 "温馨提示"
     MessageBox.alert( this.title, this.message );
->>>>>>> lh
+
   },
 }
 </script>
