@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+<<<<<<< HEAD
 
+=======
+>>>>>>> lh
 import Addinf from '../views/Addinf.vue'
 import Detailed from '../views/Detailed.vue'
 import Home from '../views/Home.vue'
@@ -9,8 +12,17 @@ import Mypart from '../views/Mypart.vue'
 import Register from '../views/Register.vue'
 import Success from '../views/Success.vue'
 import Verification from '../views/Verification.vue'
+<<<<<<< HEAD
 
 Vue.use(VueRouter)
+=======
+import MintUI from 'mint-ui'
+import { Popup } from 'vant';
+
+Vue.use(VueRouter)
+Vue.use(MintUI)
+Vue.use(Popup);
+>>>>>>> lh
 
 const routes = [ 
   {
@@ -52,7 +64,12 @@ const routes = [
     path: '/verification',
     name: 'Verification',
     component: Verification
+<<<<<<< HEAD
   }
+=======
+  },
+  
+>>>>>>> lh
 ]
 
 const router = new VueRouter({
