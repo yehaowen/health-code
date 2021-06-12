@@ -27,6 +27,12 @@
               :state="pwdState"
               placeholder="请输入密码">
     </mt-field>
+        <mt-field type="number"
+              label="身份证号"
+              v-model="uidnumber"
+              :state="uidnumberState"
+              placeholder="请输入身份证号">
+    </mt-field>
     <a href="#">用短信验证码登录</a>
     <mt-button @click="checkForm" type="primary" size="large">登录</mt-button>
     <el-footer><a href="#">找回密码</a> | <a href="#">紧急冻结</a> | <a href="#">更多选项</a></el-footer>
@@ -40,7 +46,8 @@ export default {
       username: '',
       usernameState: '',
       pwd: '',
-      pwdState: ''
+      pwdState: '',
+      uidnumberState: ''
     }
   },
   mounted(){
@@ -82,7 +89,7 @@ export default {
         console.log('login...')
         // 发送请求，执行登录业务
         this.axios.post('/login', 
-          `uphone=${this.uphone}&password=${this.pwd}`)
+          `uphone=${this.uphone}&password=${this.pwd}&uidnumber=${this.uidnumber}`)
           .then(result=>{
           console.log(result)
           if(result.data.code==200){
@@ -92,13 +99,13 @@ export default {
               duration: 2000
             })
             // 访问vuex，更新登录状态   loginOK(xx)
-            // 把服务端响应中保存的用户名，传给loginOK
-            let username = result.data.result.username;
-            this.$store.commit('loginOK', username);
+            // 把服务端响应中保存的手机号码，传给loginOK
+            let username = result.data.result.uphone;
+            this.$store.commit('loginOK', uphone);
 
-            // 向sessionStorage中存储islogin与username
+            // 向sessionStorage中存储islogin与uphone
             sessionStorage.setItem('islogin','true');
-            sessionStorage.setItem('username',username);
+            sessionStorage.setItem('uphone',uphone);
 
             // 跳转到主页
             this.$router.push('/')
