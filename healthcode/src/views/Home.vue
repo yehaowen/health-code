@@ -9,9 +9,7 @@
         </div>
         <!-- 登录按钮 -->
         <div class="btn">
-          <mt-button type="primary" size="large" @click.native="login"
-            >登录</mt-button
-          >
+          <mt-button type="primary" size="large" @click.native="login">登录</mt-button>
         </div>
         <!-- 弹出层 -->
         <van-cell is-link @click="showPopup"></van-cell>
