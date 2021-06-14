@@ -55,8 +55,7 @@ const routes = [
   {
     path: '/verification',
     name: 'Verification',
-    component: Verification
- 
+    component: Verification,
   }
  
 ]
