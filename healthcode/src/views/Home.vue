@@ -97,7 +97,7 @@ export default {
                   //跳转页面到Addinf
                   this.$router.push("/addinf");
                }else if(result.data.code==201){
-                  //如果返回失败
+                  //如果返回失败---
                 }
             });
         } else {
