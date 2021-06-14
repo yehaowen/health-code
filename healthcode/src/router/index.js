@@ -14,6 +14,7 @@ import { Popup } from 'vant';
 Vue.use(VueRouter)
 Vue.use(MintUI)
 Vue.use(Popup);
+ 
 
 const routes = [ 
   {
@@ -55,8 +56,9 @@ const routes = [
     path: '/verification',
     name: 'Verification',
     component: Verification
-  },
-  
+ 
+  }
+ 
 ]
 
 const router = new VueRouter({
