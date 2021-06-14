@@ -461,7 +461,7 @@ export default {
           .post(
             "/form",
             `hname=${this.field__user__items.hname}&
-            hphone=${field__user__items.hphone}&
+            hphone=${this.field__user__items.hphone}&
             hIDtype=${this.field__user__items.hIDtype}&
             hID_=${this.field__user__items.hID_}&
             hsex=${this.field__user__items.hsex}&
@@ -471,7 +471,7 @@ export default {
             hnp=${this.field__user__items.hnp}&
             hpr=${this.field__user__items.hpr}&
             hra=${this.field__user__items.hra}&
-            hda=${field__user__items.hda}&
+            hda=${this.field__user__items.hda}&
             hishpr=${this.radio__often__items.value}&
             hisnf0=${this.radio__recent__items.value}&
             hisnf1=${this.radio__recent__items.value}&
@@ -479,7 +479,7 @@ export default {
             hisnf3=${this.radio__recent__items.value}`
           )
           .then((result) => {
-            console.log(result);
+            console.log(result.config.data);
             alert("填报成功!");
           });
       } else {
