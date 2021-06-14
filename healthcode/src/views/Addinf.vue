@@ -228,7 +228,7 @@
           type="text"
           placeholder="请简要描述症状情况(不超过10个汉字)"
           value=""
-          readonly
+          :readonly="others"
         ></mt-field>
       </div>
     </div>
@@ -300,10 +300,10 @@ export default {
       },
       /* 目前所在地 */
       cityType: "", //当前所在地
-      cityTypeVal: "", //当前问题类型-改变后的
-      popupVisible: false, //问题类型弹框
+      cityTypeVal: "", //当前所在地-改变后的
+      popupVisible: false, //所在地弹框
       popupSlots: [
-        //问题类型弹框数据
+        //所在地弹框数据
         {
           values: ["北京", "天津", "上海", "重庆"],
         },
@@ -338,6 +338,7 @@ export default {
           },
         ],
       },
+      others: true,
     };
   },
   methods: {
@@ -452,13 +453,42 @@ export default {
         this.field__user__items.hra &&
         this.field__user__items.hda &&
         this.radio__often__items.value &&
-        this.radio__recent__items.value&&
+        this.radio__recent__items.value &&
         this.checkbox__symptom__items__value
         // &&this.
       ) {
-        alert("填报成功!");
+        this.axios
+          .post(
+            "/form",
+            `hname=${this.field__user__items.hname}&
+            hphone=${field__user__items.hphone}&
+            hIDtype=${this.field__user__items.hIDtype}&
+            hID_=${this.field__user__items.hID_}&
+            hsex=${this.field__user__items.hsex}&
+            hbirthday=${this.field__user__items.hbirthday}&
+            hcountry=${this.field__user__items.hcountry}&
+            hdr=${this.field__user__items.hdr}&
+            hnp=${this.field__user__items.hnp}&
+            hpr=${this.field__user__items.hpr}&
+            hra=${this.field__user__items.hra}&
+            hda=${field__user__items.hda}&
+            hishpr=${this.radio__often__items.value}&
+            hisnf0=${this.radio__recent__items.value}&
+            hisnf1=${this.radio__recent__items.value}&
+            hisnf2=${this.radio__recent__items.value}&
+            hisnf3=${this.radio__recent__items.value}`
+          )
+          .then((result) => {
+            console.log(result);
+            alert("填报成功!");
+          });
       } else {
         alert("必填项没有填写完全!");
+      }
+    },
+    symptom__others() {
+      if (this.checkbox__symptom__items__value.indexOf("6")) {
+        this.others = false;
       }
     },
   },
@@ -471,6 +501,11 @@ export default {
         result = true;
       }
       return result;
+    },
+  },
+  watch: {
+    checkbox__symptom__items__value() {
+      this.symptom__others();
     },
   },
 };
