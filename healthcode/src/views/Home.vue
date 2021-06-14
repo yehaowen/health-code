@@ -9,7 +9,7 @@
         </div>
         <!-- 登录按钮 -->
         <div class="btn">
-          <mt-button type="primary" size="large" @click.native="login">登录</mt-button>
+          <mt-button type="primary" size="large" @click.native="login">提交</mt-button>
         </div>
         <!-- 弹出层 -->
         <van-cell is-link @click="showPopup"></van-cell>
@@ -20,7 +20,6 @@
     </div>
   </div>
 </template>
-
 <style scoped>
 /* 整体外边距 */
 .homeLogin {
@@ -55,7 +54,6 @@
 <script>
 // 引入弹出提示框
 import { MessageBox } from "mint-ui";
-
 import { Toast } from "mint-ui";
 
 export default {
@@ -73,8 +71,8 @@ export default {
     showPopup() {
       this.show = true;
     },
-    //点击登录后拉取个人信息
 
+    //点击登录后拉取个人信息
     login() {
       //弹出对话框
       MessageBox.prompt("请输入手机号").then(({ value, action }) => {
@@ -85,24 +83,20 @@ export default {
         if (tel.test(this.use_phone_num)) {
           //发送请求 发送手机号码
           this.axios
-            .post("/home", `field__user__items.hphone=${this.use_phone_num}`)
+            .post("/sp", `uphone=${this.use_phone_num}`)
             .then((result) => {
               console.log(result);
-              //  if(result.data.code==200){
-              //    this.$toast({
-              //      message:'登录成功',
-              //      position:'bottom',
-              //      duration:2000
-              //    })
-              //跳转页面到Addinf
-              this.$router.push("/addinf");
-              //  }else if(result.data.code==201){
-              //     this.$toast({
-              //     message:'登录失败,用户名或者密码错误',
-              //     position:'bottom',
-              //     duration:2000
-              //     })
-              //   }
+               if(result.data.code==200){
+                  //把服务端响应中保存的用户名和身份证号码,传给addinf
+                  // let hname = result.data.result[0].urlname; 
+                  // let hID = result.data.result[0].uID_;      
+                  // console.log(result,hname,hID);
+                  this.$store.commit('addinf',this.use_phone_num)
+                  //跳转页面到Addinf
+                  this.$router.push("/addinf");
+               }else if(result.data.code==201){
+                  //如果返回失败---
+                }
             });
         } else {
           Toast("手机号码错误,请重新填写");
@@ -110,13 +104,7 @@ export default {
       });
     },
   },
-
   mounted() {
-    //第一次登入 弹出 "温馨提示"
-    MessageBox.alert(this.title, this.message);
-    // this.axios.get("/category").then((result) => {
-    // });
-
     //第一次登入 弹出 "温馨提示"
     MessageBox.alert(this.title, this.message);
   },
