@@ -81,27 +81,30 @@ export default {
         // console.log(value,action)   //手机号  确认操作--confirm
         this.use_phone_num = value;
         var tel = /^[1]([3-9])[0-9]{9}$/;
-        console.log(this.use_phone_num); //把use_phone_num替换成输入的值
+        //把use_phone_num替换成输入的值
         if (tel.test(this.use_phone_num)) {
           //发送请求 发送手机号码
           this.axios
             .post("/sp", `uphone=${this.use_phone_num}`)
             .then((result) => {
-              console.log(result);
                if(result.data.code==200){
                   //把服务端响应中保存的用户名和身份证号码,传给addinf
-                  let hname = result.data.result[0].urlname; 
-                  let hID = result.data.result[0].uID_;      
-                  // console.log(result,hname,hID);
-                  this.$store.commit('addinf',this.use_phone_num)
-                  //跳转页面到Addinf
-                  this.$router.push("/addinf");
+                  let userInfo = {
+                    hname : result.data.result[0].urlname, 
+                    hID : result.data.result[0].uID_
+                  };
+                  this.$store.commit('updateUserInfo',userInfo);
+                  //跳转页面到  Home-transfer
+                  Toast('提交成功!');
+                  this.$router.push("/Home-transfer");
                }else if(result.data.code==201){
-                  //如果返回失败---
+                 //手机号与服务器端不匹配时
+                  Toast('抱歉,手机号码验证失败,请重新输入');
                 }
             });
         } else {
-          Toast("手机号码错误,请重新填写");
+          //手机号码格式输入错误时
+          Toast("手机号码格式错误,请重新填写");
         }
       });
     },
