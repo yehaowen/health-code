@@ -7,6 +7,7 @@ import Login from '../views/Login.vue'
 import Mypart from '../views/Mypart.vue'
 import Register from '../views/Register.vue'
 import Success from '../views/Success.vue'
+import Hometransfer from '../views/Hometransfer.vue'
 import Verification from '../views/Verification.vue'
 import MintUI from 'mint-ui'
 import { Popup } from 'vant';
@@ -57,8 +58,13 @@ const routes = [
     name: 'Verification',
     component: Verification
  
-  }
+  },
+  {
+    path: '/hometransfer',
+    name: 'Hometransfer',
+    component: Hometransfer
  
+  }
 ]
 
 const router = new VueRouter({
