@@ -60,10 +60,27 @@
         <p>出生日期</p>
         <mt-field
           type="text"
-          v-model="field__user__items.hbirthday"
-          readonly
-          disableClear
-        ></mt-field>
+          placeholder="详细日期"
+          :value="
+            datetime__bir__items.year +
+            '-' +
+            datetime__bir__items.month +
+            '-' +
+            datetime__bir__items.date
+          "
+          ><a @click="openPicker__bir" style="color: #0066ff">选择</a></mt-field
+        >
+        <mt-datetime-picker
+          ref="picker__bir"
+          v-model="datetime__bir__items.pickerValue"
+          type="date"
+          year-format="{value} 年"
+          month-format="{value} 月"
+          date-format="{value} 日"
+          :end-date="new Date()"
+          @confirm="handleConfirm__bir"
+        >
+        </mt-datetime-picker>
       </div>
       <!-- 可修改项 -->
       <div class="baseinf">
@@ -227,7 +244,7 @@
         <mt-field
           type="text"
           placeholder="请简要描述症状情况(不超过10个汉字)"
-          value=""
+          v-model="others__symptom"
           :readonly="others"
         ></mt-field>
       </div>
@@ -260,7 +277,7 @@ export default {
         // 只读项
         hname: "",
         hphone: "",
-        hIDtype: "",
+        hIDtype: "身份证",
         hID_: "",
         hsex: "",
         hbirthday: "",
@@ -271,6 +288,14 @@ export default {
         hpr: "",
         hra: "",
         hda: "",
+      },
+      // 来返日期
+      datetime__bir__items: {
+        pickerValue: "",
+        year: "2021",
+        month: "01",
+        date: "01",
+        startDate: "",
       },
       // 单选框 是否常住重庆
       radio__often__items: {
@@ -328,6 +353,8 @@ export default {
       // 近期接触史
       switch__item: false,
       checkbox__symptom__items__value: [],
+      // 其他症状
+      others__symptom: "",
       // 阅读确认通知
       checklist__end__items: {
         value: [],
@@ -342,6 +369,14 @@ export default {
     };
   },
   methods: {
+    openPicker__bir() {
+      this.$refs.picker__bir.open();
+    },
+    handleConfirm__bir(value) {
+      this.datetime__bir__items.year = value.getFullYear();
+      this.datetime__bir__items.month = value.getMonth() + 1;
+      this.datetime__bir__items.date = value.getDate();
+    },
     // label: "来或返回重庆不超过14日(含14日)", value: "3"
     openPicker__old() {
       this.$refs.picker__old.open();
@@ -446,6 +481,7 @@ export default {
     // check最终检查
     check() {
       if (
+        this.datetime__bir__items.pickerValue &&
         this.field__user__items.hcountry &&
         this.field__user__items.hdr &&
         this.field__user__items.hnp &&
@@ -460,35 +496,27 @@ export default {
         this.axios
           .post(
             "/form",
-            `hname=${this.field__user__items.hname}&
-            hphone=${this.field__user__items.hphone}&
-            hIDtype=${this.field__user__items.hIDtype}&
-            hID_=${this.field__user__items.hID_}&
-            hsex=${this.field__user__items.hsex}&
-            hbirthday=${this.field__user__items.hbirthday}&
-            hcountry=${this.field__user__items.hcountry}&
-            hdr=${this.field__user__items.hdr}&
-            hnp=${this.field__user__items.hnp}&
-            hpr=${this.field__user__items.hpr}&
-            hra=${this.field__user__items.hra}&
-            hda=${this.field__user__items.hda}&
-            hishpr=${this.radio__often__items.value}&
-            hisnf0=${this.radio__recent__items.value}&
-            hisnf1=${this.radio__recent__items.value}&
-            hisnf2=${this.radio__recent__items.value}&
-            hisnf3=${this.radio__recent__items.value}`
+            `hname=${this.field__user__items.hname}&hphone=${this.field__user__items.hphone}&hIDtype=${this.field__user__items.hIDtype}&hID_=${this.field__user__items.hID_}&hsex=${this.field__user__items.hsex}&hbirthday=${this.datetime__bir__items.pickerValue}&hcountry=${this.field__user__items.hcountry}&hdr=${this.field__user__items.hdr}&hnp=${this.field__user__items.hnp}&hpr=${this.field__user__items.hpr}&hra=${this.field__user__items.hra}&hda=${this.field__user__items.hda}&hishpr=${this.radio__often__items.value}&hisnf0=${this.radio__recent__items.value}&hisnf1=${this.radio__recent__items.value}&hisf10=${this.checklist__travel__items.value}&hisf11=${this.checklist__travel__items.value}&hisf12=${this.checklist__travel__items.value}&hisnf2=${this.radio__recent__items.value}&hisnf2_0=${this.datetime__old__items.pickerValue}&hisnf3=${this.radio__recent__items.value}&hisnf3_0=${this.cityType}&hisnf3_1=${this.datetime__new__items.pickerValue}&hisrc=${this.switch__item}&hspm0=${this.checkbox__symptom__items__value}&hspm1=${this.checkbox__symptom__items__value}&hspm2=${this.checkbox__symptom__items__value}&hspm3=${this.checkbox__symptom__items__value}&hspm4=${this.checkbox__symptom__items__value}&hspm5=${this.checkbox__symptom__items__value}&hspm50=${this.others__symptom}`
           )
           .then((result) => {
-            console.log(result.config.data);
-            alert("填报成功!");
+            if (result.status == 200) {
+              console.log(result);
+              alert("填报成功!");
+              // 
+            }
           });
       } else {
         alert("必填项没有填写完全!");
       }
     },
     symptom__others() {
-      if (this.checkbox__symptom__items__value.indexOf("6")) {
+      if (
+        this.checkbox__symptom__items__value.indexOf("6") == -1 ? false : true
+      ) {
         this.others = false;
+      } else {
+        this.others__symptom = "";
+        this.others = true;
       }
     },
   },
