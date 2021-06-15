@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div class="absolute">
-      <img src="../assets/yimiao.png" alt="" />
-      <!-- 二维码图 -->
-      <iframe
-        :src="reportUrl"
-        frameborder="0"
-        style="width: 100%; height: 100%"
-        id="iframeBox"
-      ></iframe>
-      <div class="num">
-        <span>{{ arr[0] }}</span> <span>{{ arr[1] }}</span>
-      </div>
-    </div>
     <div class="top">
       <h3 class="title">我的渝康码</h3>
       <h3 class="name">{{ hname }}</h3>
       <h3 class="link">关于渝康码<span>|</span>渝康码管理</h3>
+      <!-- 二维码图 -->
+      <div class="qrcode">
+        <img src="../assets/yimiao.png" alt="" class="img" />
+        <iframe
+          :src="reportUrl"
+          frameborder="0"
+          style="width: 180px; height: 180px"
+          id="iframeBox"
+        ></iframe>
+        <div class="num">
+          <span>{{ arr[0] }}</span> <span>{{ arr[1] }}</span>
+        </div>
+      </div>
     </div>
     <div class="mid">
       <span class="update">更新于：{{ Time }}</span>
@@ -48,12 +48,12 @@
 export default {
   data() {
     return {
-        // 二维码链接
+      // 二维码链接
       reportUrl: "/qrcode.html",
       time: "",
       Time: "",
       arr: [],
-      hname: "",
+      hname: "名字",
     };
   },
   mounted() {
@@ -80,26 +80,25 @@ export default {
   font-family: "微软雅黑";
   vertical-align: middle;
 }
-.absolute {
-  position: absolute;
-  margin-left: 27.07vw;
-  margin-top: 30.2vh;
-  border: 1.13vw solid #e2c377;
-  width: 25.64vh;
-  height: 25.64vh;
+.qrcode {
+  position: relative;
+  margin: 0 auto;
+  border: 10px solid #e2c377;
+  width: 180px;
+  height: 180px;
+  text-align: center;
+  /* overflow: hidden; */
 }
-.absolute img {
-  width: 6vh;
-  height: 6vh;
-  margin-left: -6vw;
-  margin-top: -3vh;
+.img {
+  position: absolute;
+  width: 50px;
+  top: -30px;
+  left: -30px;
 }
 .num {
-  margin-top: 26.01vh;
-  margin-left: 7.5vw;
+  margin: 5px auto;
   font-size: 1.5em;
   color: #fff;
-  width: 29vw;
 }
 h3 {
   text-align: center;

@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,17 +23,17 @@
     <script type="text/javascript" src="./js/jquery.qrcode.js"></script>
     <script type="text/javascript" src="./js/utf.js"></script>
     <script>
-        let uid = "Hello world"
+        let uid = "健康码"
         let ucolor="green"
         jQuery('#qrcode').qrcode({
             text: utf16to8(uid),
             render: "canvas",//设置渲染方式  
-            width: 160,     //设置宽度  
-            height: 160,     //设置高度  
+            width: 180,     //设置宽度  
+            height: 180,     //设置高度  
             typeNumber: -1,      //计算模式  
             correctLevel: QRErrorCorrectLevel.H,//纠错等级  
             background: 'white',//背景颜色  
-            foreground: 'green', //前景颜色 
+            foreground: 'red', //前景颜色 
         });
     </script>
 </body>
