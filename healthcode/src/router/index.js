@@ -58,6 +58,12 @@ const routes = [
     name: 'Verification',
     component: Verification
  
+  },
+  {
+    path: '/hometransfer',
+    name: 'Hometransfer',
+    component: Hometransfer
+ 
   }
 ]
 
