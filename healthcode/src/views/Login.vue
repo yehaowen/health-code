@@ -47,6 +47,7 @@ export default {
       usernameState: '',
       pwd: '',
       pwdState: '',
+      uidnumber: '',
       uidnumberState: ''
     }
   },
