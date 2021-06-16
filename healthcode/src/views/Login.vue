@@ -12,7 +12,7 @@
 
     <!-- 表单 -->
     <div class="user-info">
-                <img :src="article.avatar" class="user-info-avatar">
+                <img :src="avatar" class="user-info-avatar">
             </div>
     <mt-field type="number"
               label="手机号"
@@ -27,7 +27,7 @@
               :state="pwdState"
               placeholder="请输入密码">
     </mt-field>
-        <mt-field type="number"
+    <mt-field type="number"
               label="身份证号"
               v-model="uidnumber"
               :state="uidnumberState"
@@ -51,8 +51,8 @@ export default {
     }
   },
   mounted(){
-    this.article.avatar = 
-      require('../assets/avatar/'+this.article.avatar)
+    this.avatar = 
+      require('../assets/avatar/'+this.avatar)
   },
   methods: {
     /** 验证密码 */
@@ -66,7 +66,6 @@ export default {
         return false;
       }
     },
-
     /** 验证手机号 */
     checkUphone(){
       // 获取文本框的值  
@@ -81,7 +80,6 @@ export default {
         return false;
       }
     },
-
     /** 点击确认按钮 验证表单 */
     checkForm(){
       // 验证用户名
@@ -102,11 +100,9 @@ export default {
             // 把服务端响应中保存的手机号码，传给loginOK
             let username = result.data.result.uphone;
             this.$store.commit('loginOK', uphone);
-
             // 向sessionStorage中存储islogin与uphone
             sessionStorage.setItem('islogin','true');
             sessionStorage.setItem('uphone',uphone);
-
             // 跳转到主页
             this.$router.push('/')
           }else if(result.data.code==201){
