@@ -500,9 +500,9 @@ export default {
           )
           .then((result) => {
             if (result.status == 200) {
-              console.log(result);
               alert("填报成功!");
-              // 
+              // 跳转到主页
+              this.$router.push("/success");
             }
           });
       } else {
