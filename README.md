@@ -2,7 +2,7 @@
 
 ## 数据库设计
 
-![](D:\project\web\item\health-code\md_img\mysql.png)
+![](md_img\mysql.png)
 
 ## 后台API列表
 
