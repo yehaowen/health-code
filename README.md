@@ -2,7 +2,7 @@
 
 ## 数据库设计
 
-![](md_img\mysql.png)
+![](https://github.com/yehaowen/health-code/blob/main/md_img/mysql.png)
 
 ## 后台API列表
 
