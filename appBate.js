@@ -62,6 +62,30 @@ server.post('/login', (req, res,next) => {
 
 });
 
+//绑定手机接口 通过手机号查询
+server.post('/sp', (req, res,next) => {
+  //解析手机号
+  let uphone = req.body.uphone;
+ 
+  // SQL语句 user表
+  let sql = 'SELECT urlname,uID_ FROM user WHERE uphone=?';
+  pool.query(sql, [uphone], (error, results) => {
+    if (error){
+
+      next(error);
+
+      return
+    }
+    if(results.length == 0){ //查询失败
+      res.send({message:'search failed',code:201});
+    } else {                 //查询成功
+      res.send({message:'ok',code:200,result:results});
+    }
+  });
+
+});
+
+
 //用户注册接口
 server.post('/register', (req, res,next) => {
  
@@ -97,6 +121,7 @@ server.post('/register', (req, res,next) => {
 
 //填表接口
 server.post('/form', (req,res,next) => {
+ 
   //获取填表数据
   let hname = req.body.hname;
   let hphone = req.body.hphone;
@@ -104,8 +129,7 @@ server.post('/form', (req,res,next) => {
   let hID_ = req.body.hID_;
   let hsex = req.body.hsex;
   let hbirthday = req.body.hbirthday;
-
-  let hcountry =req.body.hcountry;
+  let hcountry = req.body.hcountry;
   let hdr = req.body.hdr;
   let hnp = req.body.hnp;
   let hpr = req.body.hpr;
@@ -133,10 +157,10 @@ server.post('/form', (req,res,next) => {
   let hspm5= req.body.hspm5;
   let hspm50=req.body.hspm50;
   //注入数据 healthinfo表
-  sql = 'INSERT healthinfo(hname,hphone,hIDtype,hID_,hsex,hbirthday,hcountry,hdr,hnp,hpr,hra,hda,hishpr,hisnf0,hisnf1,hisnf10,hisnf11,hisnf12,hisnf2,hisnf2_0,hisnf3,hisnf3_0,hisnf3_1,hisrc,hspm0,hspm1,hspm2,hspm3,hspm4,hspm5,hspm50) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+  sql = 'INSERT healthinfo(hname,hphone,hIDtype,hID_,hsex,hbirthday,hcountry,hdr,hnp,hpr,hra,hda,hishpr,hisnf0,hisnf1,hisnf10,	hisnf11,hisnf12,hisnf2,hisnf2_0,hisnf3,hisnf3_0,hisnf3_1,hisrc,hspm0,hspm1,hspm2,hspm3,hspm4,hspm5,hspm50) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     
       // 将用户的相关信息插入到数据表
-      pool.query(sql, [hname,hphone,hIDtype,hID_,hsex,hbirthday,hcountry,hdr,hnp,hpr,hra,hda,hishpr,hisnf0,hisnf1,hisnf10,hisnf11,hisnf12,hisnf2,hisnf2_0,hisnf3,hisnf3_0,hisnf3_1,hisrc,hspm0,hspm1,hspm2,hspm3,hspm4,hspm5,hspm50], (error, results) => {
+      pool.query(sql, [hname,hphone,hIDtype,hID_,hsex,hbirthday,hcountry,hdr,hnp,hpr,hra,hda,hishpr,hisnf0,hisnf1,hisnf10,	hisnf11,hisnf12,hisnf2,hisnf2_0,hisnf3,hisnf3_0,hisnf3_1,hisrc,hspm0,hspm1,hspm2,hspm3,hspm4,hspm5,hspm50], (error, results) => {
         if (error){
 
           next(error);
