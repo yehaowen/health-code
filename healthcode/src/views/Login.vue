@@ -1,4 +1,4 @@
-<!-- views/Register.vue -->
+<!-- views/Login.vue -->
 <template>
   <div>
     <mt-header title="登录">
@@ -11,15 +11,12 @@
     </mt-header>
 
     <!-- 表单 -->
-    <div class="user-info">
-                <img :src="avatar" class="user-info-avatar">
-            </div>
-    <mt-field type="number"
-              label="手机号"
-              v-model="uphone"
-              :state="uphoneState"
-              @blur.native="checkUphone"
-              placeholder="请输入手机号">
+    <mt-field type="text"
+              label="用户名"
+              v-model="username"
+              :state="usernameState"
+              @blur.native="checkUsername"
+              placeholder="请输入用户名">
     </mt-field>
     <mt-field type="password"
               label="密码"
@@ -27,15 +24,7 @@
               :state="pwdState"
               placeholder="请输入密码">
     </mt-field>
-    <mt-field type="number"
-              label="身份证号"
-              v-model="uidnumber"
-              :state="uidnumberState"
-              placeholder="请输入身份证号">
-    </mt-field>
-    <a href="#">用短信验证码登录</a>
     <mt-button @click="checkForm" type="primary" size="large">登录</mt-button>
-    <el-footer><a href="#">找回密码</a> | <a href="#">紧急冻结</a> | <a href="#">更多选项</a></el-footer>
   </div>
 </template>
 
@@ -46,14 +35,8 @@ export default {
       username: '',
       usernameState: '',
       pwd: '',
-      pwdState: '',
-      uidnumber: '',
-      uidnumberState: ''
+      pwdState: ''
     }
-  },
-  mounted(){
-    this.avatar = 
-      require('../assets/avatar/'+this.avatar)
   },
   methods: {
     /** 验证密码 */
@@ -67,28 +50,30 @@ export default {
         return false;
       }
     },
-    /** 验证手机号 */
-    checkUphone(){
+
+    /** 验证账号 */
+    checkUsername(){
       // 获取文本框的值  
       // 通过正则表达式，验证文本框的内容是否合法
-      let reg = /^1[3-9]\d{9}$/;
+      let reg = /^\w{6,15}$/;
       // 分支业务：如果合法(state:succes)如果不合法(state:error)
-      if(reg.test(this.uphone)){
-        this.uphoneState = 'success'
+      if(reg.test(this.username)){
+        this.usernameState = 'success'
         return true;
       }else{
-        this.uphoneState = 'error'
+        this.usernameState = 'error'
         return false;
       }
     },
+
     /** 点击确认按钮 验证表单 */
     checkForm(){
       // 验证用户名
-      if(this.checkUphone() && this.checkPwd()){
+      if(this.checkUsername() && this.checkPwd()){
         console.log('login...')
         // 发送请求，执行登录业务
         this.axios.post('/login', 
-          `uphone=${this.uphone}&password=${this.pwd}&uidnumber=${this.uidnumber}`)
+          `username=${this.username}&password=${this.pwd}`)
           .then(result=>{
           console.log(result)
           if(result.data.code==200){
@@ -98,12 +83,14 @@ export default {
               duration: 2000
             })
             // 访问vuex，更新登录状态   loginOK(xx)
-            // 把服务端响应中保存的手机号码，传给loginOK
-            let username = result.data.result.uphone;
-            this.$store.commit('loginOK', uphone);
-            // 向sessionStorage中存储islogin与uphone
+            // 把服务端响应中保存的用户名，传给loginOK
+            let username = result.data.result.username;
+            this.$store.commit('loginOK', username);
+
+            // 向sessionStorage中存储islogin与username
             sessionStorage.setItem('islogin','true');
-            sessionStorage.setItem('uphone',uphone);
+            sessionStorage.setItem('username',username);
+
             // 跳转到主页
             this.$router.push('/')
           }else if(result.data.code==201){
