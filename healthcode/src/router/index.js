@@ -3,21 +3,21 @@ import VueRouter from 'vue-router'
 import Addinf from '../views/Addinf.vue'
 import Detailed from '../views/Detailed.vue'
 import Home from '../views/Home.vue'
+import Hometransfer from '../views/Hometransfer.vue'
 import Login from '../views/Login.vue'
 import Mypart from '../views/Mypart.vue'
 import Register from '../views/Register.vue'
 import Success from '../views/Success.vue'
 import Verification from '../views/Verification.vue'
 
+
 import MintUI from 'mint-ui'
-import { Popup } from 'vant';
 
 Vue.use(VueRouter)
 Vue.use(MintUI)
-Vue.use(Popup);
- 
 
-const routes = [ 
+
+const routes = [
   {
     path: '/addinf',
     name: 'Addinf',
@@ -28,7 +28,7 @@ const routes = [
     name: 'Detailed',
     component: Detailed
   },
-		{
+  {
     path: '/home',
     name: 'Home',
     component: Home
@@ -57,13 +57,12 @@ const routes = [
     path: '/verification',
     name: 'Verification',
     component: Verification
- 
+
   },
   {
     path: '/hometransfer',
     name: 'Hometransfer',
     component: Hometransfer
- 
   }
 ]
 

@@ -4,10 +4,17 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import { Popup } from 'vant';
+import { Cell, CellGroup } from 'vant';
+import { Checkbox, CheckboxGroup } from 'vant';
 
 Vue.config.productionTip = false
-
+Vue.use(Popup);
 Vue.use(ElementUI);
+Vue.use(Cell);
+Vue.use(CellGroup);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
 
 // 配置axios
 import axios from 'axios';
@@ -24,17 +31,10 @@ import 'mint-ui/lib/style.min.css';
 Vue.use(MintUI);
 
 // 配置ElementUI
-import Vue from 'vue';
-import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import App from './App.vue';
 
 Vue.use(ElementUI);
 
-new Vue({
-  el: '#app',
-  render: h => h(App)
-});
 
 new Vue({
   router,
