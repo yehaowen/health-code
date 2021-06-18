@@ -1,11 +1,12 @@
 <template>
   <div class="homeLogin">
     <div class="user">
-      <h1>欢迎使用XXX</h1>
+      <h2>欢迎使用XXX</h2>
       <div class="homeLogin">
         <!-- 身份卡片图 -->
         <div class="idCard">
           <img src="../assets/register.png" width="33%" />
+          <p>请先登录账号</p>
         </div>
         <!-- 登录按钮 -->
         <div class="btn">
@@ -96,7 +97,7 @@ export default {
                   this.$store.commit('updateUserInfo',userInfo);
                   //跳转页面到  Home-transfer
                   Toast('提交成功!');
-                  this.$router.push("/Home-transfer");
+                  this.$router.push("/Hometransfer");
                }else if(result.data.code==201){
                  //手机号与服务器端不匹配时
                   Toast('抱歉,手机号码验证失败,请重新输入');
@@ -109,6 +110,5 @@ export default {
       });
     },
   },
-
 };
 </script>
