@@ -89,7 +89,7 @@ server.post('/sp', (req, res,next) => {
 //通过手机号查询 healthinfo表
 server.post('/sn', (req, res,next) => {
   //解析手机号
-  let uphone = req.body.uphone;
+  let hphone = req.body.hphone;
  
   // SQL语句 user表
   let sql = 'SELECT hname,hsex FROM healthinfo WHERE hphone=?';
