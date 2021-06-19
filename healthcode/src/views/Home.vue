@@ -12,9 +12,9 @@
         <div class="btn">
           <mt-button type="primary" size="large" @click.native="login">提交</mt-button>
         </div>
-        <!-- 弹出层 -->
+        <!-- 弹出层
         <van-cell is-link @click="showPopup"></van-cell>
-        <van-popup v-model="show">内容</van-popup>
+        <van-popup v-model="show">内容</van-popup> -->
       </div>
 
       <div style="display: none" class="user-login" id="user-login"></div>
@@ -89,19 +89,20 @@ export default {
             .post("/sp", `uphone=${this.use_phone_num}`)
             .then((result) => {
                if(result.data.code==200){
-                  //把服务端响应中保存的用户名和身份证号码,传给addinf
+                  //把服务端响应中保存的用户名和身份证号码,传给VueX
                   let userInfo = {
-                    hname : result.data.result[0].urlname, 
-                    hID : result.data.result[0].uID_
+                    uphone : this.use_phone_num,
+                    uname : result.data.result[0].urlname, 
+                    uID_ : result.data.result[0].uID_
                   };
                   this.$store.commit('updateUserInfo',userInfo);
-                  //跳转页面到  Home-transfer
                   Toast('提交成功!');
+                  //跳转页面到  Home-transfer
                   this.$router.push("/Hometransfer");
-               }else if(result.data.code==201){
-                 //手机号与服务器端不匹配时
-                  Toast('抱歉,手机号码验证失败,请重新输入');
-                }
+               }else{
+                 //查询失败 提示重新输入
+                 Toast("请输入您注册时使用的手机号码");
+                 }
             });
         } else {
           //手机号码格式输入错误时

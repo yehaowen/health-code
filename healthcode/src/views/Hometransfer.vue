@@ -61,12 +61,31 @@
 </style>
 
 <script>
+
+import {mapState,mapMutations,mapAction } from 'vuex'
 export default {
-    methods: {
-        checkOut(){
-            this.$router.push("/Addinf");
+    data() {
+        return {
+            
         }
     },
+    methods: {
+        checkOut(){
+            //点击提交 查询数据库是否已经注册过二维码
+            this.axios.post("/sn",`hphone=${this.$store.state.hphone}`).then((result) => {
+                if(result.data.code==200){
+                    // 已经注册过--跳转页面到二维码页面 /mypart
+                    this.$router.push("/Mypart");
+                    }else if(result.data.code==201){
+                        // 尚未注册过--跳转页面到  /Addinf
+                        this.$router.push("/Addinf");
+                    }
+            })
+        }
+    },
+    computed:{
+        ...mapState(["hname", "hID"]),
+    }
 }
 </script>
 
