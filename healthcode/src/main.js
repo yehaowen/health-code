@@ -7,6 +7,7 @@ import store from './store'
 import { Popup } from 'vant';
 import { Cell, CellGroup } from 'vant';
 import { Checkbox, CheckboxGroup } from 'vant';
+import 'vant/lib/index.css';
 
 Vue.config.productionTip = false
 Vue.use(Popup);

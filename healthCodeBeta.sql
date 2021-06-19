@@ -82,7 +82,7 @@ hIDtype VARCHAR(64) COMMENT '证件类型',
 
 hID_ VARCHAR(64) COMMENT '证件号',
 
-hsex INT COMMENT '性别',
+hsex VARCHAR(64) COMMENT '性别',
 
 hbirthday VARCHAR(64) COMMENT '生日',
 
@@ -104,11 +104,11 @@ hisnf0 INT COMMENT '一直在重庆3个月或以上',
 
 hisnf1 INT COMMENT '来或返回重庆超14日',
 
-hisnf10 INT COMMENT '中国大陆其他省(自治区)市',
+hisnf10 VARCHAR(64) COMMENT '中国大陆其他省(自治区)市',
 
-hisnf11 INT COMMENT '中国港澳台地区',
+hisnf11 VARCHAR(64) COMMENT '中国港澳台地区',
 
-hisnf12 INT COMMENT '国外',
+hisnf12 VARCHAR(64) COMMENT '国外',
 
 hisnf2 INT COMMENT '来或返回重庆不超14日(含14)',
 
@@ -122,17 +122,17 @@ hisnf3_1 VARCHAR(64) COMMENT '拟返回重庆日期',
 
 hisrc INT COMMENT '14日内接触过患者',
 
-hspm0  INT COMMENT '自觉正常',
+hspm0  VARCHAR(64) COMMENT '自觉正常',
 
-hspm1  INT COMMENT '发热37.3以下',
+hspm1  VARCHAR(64) COMMENT '发热37.3以下',
 
-hspm2  INT COMMENT '发热37.3以上',
+hspm2  VARCHAR(64) COMMENT '发热37.3以上',
 
-hspm3  INT COMMENT '干咳',
+hspm3  VARCHAR(64) COMMENT '干咳',
 
-hspm4  INT COMMENT '乏力',
+hspm4  VARCHAR(64) COMMENT '乏力',
 
-hspm5  INT COMMENT '其它症状',
+hspm5  VARCHAR(64) COMMENT '其它症状',
 
 hspm50 VARCHAR(64) COMMENT '其它症状简述'
 ) ;

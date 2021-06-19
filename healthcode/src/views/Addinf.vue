@@ -77,6 +77,7 @@
           year-format="{value} 年"
           month-format="{value} 月"
           date-format="{value} 日"
+          :start-date="new Date(1900, 1, 1)"
           :end-date="new Date()"
           @confirm="handleConfirm__bir"
         >
@@ -267,6 +268,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -289,7 +292,7 @@ export default {
         hra: "",
         hda: "",
       },
-      // 来返日期
+      // 出生日期
       datetime__bir__items: {
         pickerValue: "",
         year: "2021",
@@ -481,7 +484,6 @@ export default {
     // check最终检查
     check() {
       if (
-        this.datetime__bir__items.pickerValue &&
         this.field__user__items.hcountry &&
         this.field__user__items.hdr &&
         this.field__user__items.hnp &&
@@ -496,7 +498,7 @@ export default {
         this.axios
           .post(
             "/form",
-            `hname=${this.field__user__items.hname}&hphone=${this.field__user__items.hphone}&hIDtype=${this.field__user__items.hIDtype}&hID_=${this.field__user__items.hID_}&hsex=${this.field__user__items.hsex}&hbirthday=${this.datetime__bir__items.pickerValue}&hcountry=${this.field__user__items.hcountry}&hdr=${this.field__user__items.hdr}&hnp=${this.field__user__items.hnp}&hpr=${this.field__user__items.hpr}&hra=${this.field__user__items.hra}&hda=${this.field__user__items.hda}&hishpr=${this.radio__often__items.value}&hisnf0=${this.radio__recent__items.value}&hisnf1=${this.radio__recent__items.value}&hisf10=${this.checklist__travel__items.value}&hisf11=${this.checklist__travel__items.value}&hisf12=${this.checklist__travel__items.value}&hisnf2=${this.radio__recent__items.value}&hisnf2_0=${this.datetime__old__items.pickerValue}&hisnf3=${this.radio__recent__items.value}&hisnf3_0=${this.cityType}&hisnf3_1=${this.datetime__new__items.pickerValue}&hisrc=${this.switch__item}&hspm0=${this.checkbox__symptom__items__value}&hspm1=${this.checkbox__symptom__items__value}&hspm2=${this.checkbox__symptom__items__value}&hspm3=${this.checkbox__symptom__items__value}&hspm4=${this.checkbox__symptom__items__value}&hspm5=${this.checkbox__symptom__items__value}&hspm50=${this.others__symptom}`
+            `hname=${this.hname}&hphone=${this.field__user__items.hphone}&hIDtype=${this.field__user__items.hIDtype}&hID_=${this.hID}&hsex=${this.field__user__items.hsex}&hbirthday=${this.datetime__bir__items.pickerValue}&hcountry=${this.field__user__items.hcountry}&hdr=${this.field__user__items.hdr}&hnp=${this.field__user__items.hnp}&hpr=${this.field__user__items.hpr}&hra=${this.field__user__items.hra}&hda=${this.field__user__items.hda}&hishpr=${this.radio__often__items.value}&hisnf0=${this.radio__recent__items.value}&hisnf1=${this.radio__recent__items.value}&hisf10=${this.checklist__travel__items.value}&hisf11=${this.checklist__travel__items.value}&hisf12=${this.checklist__travel__items.value}&hisnf2=${this.radio__recent__items.value}&hisnf2_0=${this.datetime__old__items.pickerValue}&hisnf3=${this.radio__recent__items.value}&hisnf3_0=${this.cityType}&hisnf3_1=${this.datetime__new__items.pickerValue}&hisrc=${this.switch__item}&hspm0=${this.checkbox__symptom__items__value}&hspm1=${this.checkbox__symptom__items__value}&hspm2=${this.checkbox__symptom__items__value}&hspm3=${this.checkbox__symptom__items__value}&hspm4=${this.checkbox__symptom__items__value}&hspm5=${this.checkbox__symptom__items__value}&hspm50=${this.others__symptom}`
           )
           .then((result) => {
             if (result.status == 200) {
@@ -519,6 +521,45 @@ export default {
         this.others = true;
       }
     },
+    getUinf() {
+      // 正则 姓名->*
+      let hname = "";
+      hname = this.hname;
+      if (hname.length == 2) {
+        hname = hname.replace(/^([\u4e00-\u9fa5]{1})+$/, "*$1");
+      } else {
+        hname = hname.replace(/^([\u4e00-\u9fa5]{1})+$/, "**$1");
+      }
+      this.field__user__items.hname = hname;
+      // 正则 123->***
+      let hid = this.hID;
+      hid = hid.replace(/^(\d{4})\d+(\d{3})$/, "$1******$2");
+      this.field__user__items.hID_ = hid;
+
+      if (this.field__user__items.hID_.substr(-2, 1) % 2 == 0) {
+        this.field__user__items.hsex = "女";
+      } else {
+        this.field__user__items.hsex = "男";
+      }
+      let birshow = this.hID.substr(6, 8);
+      this.datetime__bir__items.year = birshow.substr(0, 4);
+      this.datetime__bir__items.month = birshow.substr(4, 2);
+      this.datetime__bir__items.date = birshow.substr(6, 2);
+      let bir =
+        this.datetime__bir__items.year +
+        "-" +
+        this.datetime__bir__items.month +
+        "-" +
+        this.datetime__bir__items.date;
+      this.datetime__bir__items.pickerValue = bir;
+      // datetime__bir__items: {
+      //   pickerValue: "",
+      //   year: "2021",
+      //   month: "01",
+      //   date: "01",
+      //   startDate: "",
+      // },
+    },
   },
   computed: {
     agree() {
@@ -530,11 +571,15 @@ export default {
       }
       return result;
     },
+    ...mapState(["hname", "hID"]),
   },
   watch: {
     checkbox__symptom__items__value() {
       this.symptom__others();
     },
+  },
+  beforeMount() {
+    this.getUinf();
   },
 };
 </script>
