@@ -2,7 +2,7 @@
 
 ## 数据库设计
 
-![](https://github.com/yehaowen/health-code/blob/main/md_img/mysql.png)
+![mysql](https://github.com/yehaowen/health-code/blob/main/md_img/mysql.png)
 
 ## 后台API列表
 
@@ -18,8 +18,8 @@
 
 ## 前端功能描述
 
-![](https://github.com/yehaowen/health-code/blob/main/md_img/html.png)
+![html](https://github.com/yehaowen/health-code/blob/main/md_img/html.png)
 
 ## 职责划分
 
-![](https://github.com/yehaowen/health-code/blob/main/md_img/part.png)
+![team](https://github.com/yehaowen/health-code/blob/main/md_img/team.png)
