@@ -86,6 +86,30 @@ server.post('/sp', (req, res,next) => {
 });
 
 
+//通过手机号查询 healthinfo表
+server.post('/sn', (req, res,next) => {
+  //解析手机号
+  let uphone = req.body.uphone;
+ 
+  // SQL语句 user表
+  let sql = 'SELECT hname,hsex FROM healthinfo WHERE hphone=?';
+  pool.query(sql, [uphone], (error, results) => {
+    if (error){
+      next(error);
+      return;
+    }
+    if(results.length == 0){ //查询失败
+      res.send({message:'search failed',code:201});
+    } else {                 //查询成功
+      res.send({message:'ok',code:200,result:results});
+    }
+  });
+});
+
+
+
+
+
 //用户注册接口
 server.post('/register', (req, res,next) => {
  
