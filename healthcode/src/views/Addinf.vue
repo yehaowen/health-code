@@ -42,7 +42,7 @@
         <p>证件号码</p>
         <mt-field
           type="text"
-          v-model="field__user__items.hID_"
+          v-model="field__user__items.hID"
           readonly
           disableClear
         ></mt-field>
@@ -281,7 +281,7 @@ export default {
         hname: "",
         hphone: "",
         hIDtype: "身份证",
-        hID_: "",
+        hID: "",
         hsex: "",
         hbirthday: "",
         // 可修改项
@@ -372,6 +372,7 @@ export default {
     };
   },
   methods: {
+    // 获取身份证生日信息
     openPicker__bir() {
       this.$refs.picker__bir.open();
     },
@@ -498,7 +499,7 @@ export default {
         this.axios
           .post(
             "/form",
-            `hname=${this.hname}&hphone=${this.field__user__items.hphone}&hIDtype=${this.field__user__items.hIDtype}&hID_=${this.hID}&hsex=${this.field__user__items.hsex}&hbirthday=${this.datetime__bir__items.pickerValue}&hcountry=${this.field__user__items.hcountry}&hdr=${this.field__user__items.hdr}&hnp=${this.field__user__items.hnp}&hpr=${this.field__user__items.hpr}&hra=${this.field__user__items.hra}&hda=${this.field__user__items.hda}&hishpr=${this.radio__often__items.value}&hisnf0=${this.radio__recent__items.value}&hisnf1=${this.radio__recent__items.value}&hisf10=${this.checklist__travel__items.value}&hisf11=${this.checklist__travel__items.value}&hisf12=${this.checklist__travel__items.value}&hisnf2=${this.radio__recent__items.value}&hisnf2_0=${this.datetime__old__items.pickerValue}&hisnf3=${this.radio__recent__items.value}&hisnf3_0=${this.cityType}&hisnf3_1=${this.datetime__new__items.pickerValue}&hisrc=${this.switch__item}&hspm0=${this.checkbox__symptom__items__value}&hspm1=${this.checkbox__symptom__items__value}&hspm2=${this.checkbox__symptom__items__value}&hspm3=${this.checkbox__symptom__items__value}&hspm4=${this.checkbox__symptom__items__value}&hspm5=${this.checkbox__symptom__items__value}&hspm50=${this.others__symptom}`
+            `hname=${this.hname}&hphone=${this.hphone}&hIDtype=${this.field__user__items.hIDtype}&hID_=${this.hID_}&hsex=${this.field__user__items.hsex}&hbirthday=${this.datetime__bir__items.pickerValue}&hcountry=${this.field__user__items.hcountry}&hdr=${this.field__user__items.hdr}&hnp=${this.field__user__items.hnp}&hpr=${this.field__user__items.hpr}&hra=${this.field__user__items.hra}&hda=${this.field__user__items.hda}&hishpr=${this.radio__often__items.value}&hisnf0=${this.radio__recent__items.value}&hisnf1=${this.radio__recent__items.value}&hisf10=${this.checklist__travel__items.value}&hisf11=${this.checklist__travel__items.value}&hisf12=${this.checklist__travel__items.value}&hisnf2=${this.radio__recent__items.value}&hisnf2_0=${this.datetime__old__items.pickerValue}&hisnf3=${this.radio__recent__items.value}&hisnf3_0=${this.cityType}&hisnf3_1=${this.datetime__new__items.pickerValue}&hisrc=${this.switch__item}&hspm0=${this.checkbox__symptom__items__value}&hspm1=${this.checkbox__symptom__items__value}&hspm2=${this.checkbox__symptom__items__value}&hspm3=${this.checkbox__symptom__items__value}&hspm4=${this.checkbox__symptom__items__value}&hspm5=${this.checkbox__symptom__items__value}&hspm50=${this.others__symptom}`
           )
           .then((result) => {
             if (result.status == 200) {
@@ -531,17 +532,22 @@ export default {
         hname = hname.replace(/^([\u4e00-\u9fa5]{1})+$/, "**$1");
       }
       this.field__user__items.hname = hname;
-      // 正则 123->***
-      let hid = this.hID;
+      // 正则 手机号
+      let hphone = this.hphone;
+      hphone = hphone.replace(/^(\d{4})\d+(\d{3})$/, "$1******$2");
+      this.field__user__items.hphone = hphone;
+      // 正则 身份证->***
+      let hid = this.hID_;
       hid = hid.replace(/^(\d{4})\d+(\d{3})$/, "$1******$2");
-      this.field__user__items.hID_ = hid;
-
-      if (this.field__user__items.hID_.substr(-2, 1) % 2 == 0) {
+      this.field__user__items.hID = hid;
+      // 显示性别
+      if (this.field__user__items.hID.substr(-2, 1) % 2 == 0) {
         this.field__user__items.hsex = "女";
       } else {
         this.field__user__items.hsex = "男";
       }
-      let birshow = this.hID.substr(6, 8);
+      // 显示身份证上的生日
+      let birshow = this.hID_.substr(6, 8);
       this.datetime__bir__items.year = birshow.substr(0, 4);
       this.datetime__bir__items.month = birshow.substr(4, 2);
       this.datetime__bir__items.date = birshow.substr(6, 2);
@@ -552,13 +558,6 @@ export default {
         "-" +
         this.datetime__bir__items.date;
       this.datetime__bir__items.pickerValue = bir;
-      // datetime__bir__items: {
-      //   pickerValue: "",
-      //   year: "2021",
-      //   month: "01",
-      //   date: "01",
-      //   startDate: "",
-      // },
     },
   },
   computed: {
@@ -571,7 +570,7 @@ export default {
       }
       return result;
     },
-    ...mapState(["hname", "hID"]),
+    ...mapState(["hname", "hID_", "hphone"]),
   },
   watch: {
     checkbox__symptom__items__value() {

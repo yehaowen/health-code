@@ -75,10 +75,10 @@ export default {
             this.axios.post("/sn",`hphone=${this.$store.state.hphone}`).then((result) => {
                 if(result.data.code==200){
                     // 已经注册过--跳转页面到二维码页面 /mypart
-                    this.$router.push("/Mypart");
+                    this.$router.push("/mypart");
                     }else if(result.data.code==201){
                         // 尚未注册过--跳转页面到  /Addinf
-                        this.$router.push("/Addinf");
+                        this.$router.push("/addinf");
                     }
             })
         }

@@ -10,8 +10,9 @@
         <iframe
           :src="reportUrl"
           frameborder="0"
-          style="width: 180px; height: 180px"
+          style="width: 100%; height: 100%"
           id="iframeBox"
+          class="iframe"
         ></iframe>
         <div class="num">
           <span>{{ arr[0] }}</span> <span>{{ arr[1] }}</span>
@@ -38,8 +39,10 @@
       </div>
       <div class="bm3">
         <img src="../assets/zhen.png" alt="" />
-        <span>已接种新冠疫苗2剂（共2剂）</span>
-        <a><img class="back" src="../assets/rightback.png" alt="" /></a>
+        <span
+          >已接种新冠疫苗2剂（共2剂）<a
+            ><img class="back" src="../assets/rightback.png" alt="" /></a
+        ></span>
       </div>
     </div>
   </div>
@@ -83,9 +86,10 @@ export default {
 .qrcode {
   position: relative;
   margin: 0 auto;
-  border: 10px solid #e2c377;
-  width: 180px;
-  height: 180px;
+  border: 10px solid #fffb16;
+  border-radius: 10px;
+  width: 184px;
+  height: 184px;
   text-align: center;
   /* overflow: hidden; */
 }
@@ -94,6 +98,11 @@ export default {
   width: 50px;
   top: -30px;
   left: -30px;
+}
+.iframe {
+  position: absolute;
+  top: 2px;
+  left: 2px;
 }
 .num {
   margin: 5px auto;
@@ -119,7 +128,7 @@ h3 {
   line-height: 6vh;
 }
 .bottom {
-  height: 26.91vh;
+  height: 26.91px;
   background-color: rgb(255, 255, 255);
 }
 .btn-t {
@@ -131,9 +140,8 @@ h3 {
   float: right;
   margin-right: 5.4vw;
   width: 18.9vw;
-  height: 4.25vh;
+  height: 40px;
   margin-top: 3vh;
-  padding: 1.8vw;
 }
 .clearfix::after {
   content: "\200B";
@@ -206,8 +214,9 @@ h6 {
 }
 .bm3 .back {
   margin-top: 2vh;
-  margin-left: 22vw;
-  height: 3.2vh;
+  margin-left: 40vw;
+  height: 30px;
+  width: 30px;
 }
 .submit .back {
   float: right;
