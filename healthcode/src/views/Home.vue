@@ -98,7 +98,7 @@ export default {
                   this.$store.commit('updateUserInfo',userInfo);
                   Toast('提交成功!');
                   //跳转页面到  Home-transfer
-                  this.$router.push("/Hometransfer");
+                  this.$router.push("/hometransfer");
                }else{
                  //查询失败 提示重新输入
                  Toast("请输入您注册时使用的手机号码");
