@@ -29,7 +29,7 @@
             let qrcodevalue = hphone || "健康码"
             // 发送请求,判断用户上报信息状态
             // 通过状态判断颜色
-            let foreground = "green"
+            let foreground = "yellow"
 
             // 二维码配置信息
             jQuery('#qrcode').qrcode({

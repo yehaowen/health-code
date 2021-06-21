@@ -505,7 +505,7 @@ export default {
             if (result.status == 200) {
               alert("填报成功!");
               // 跳转到主页
-              this.$router.push("/mypart");
+              this.$router.push("/success");
             }
           });
       } else {
