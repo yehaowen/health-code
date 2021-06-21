@@ -2,11 +2,10 @@
   <div>
     <div class="top">
       <h3 class="title">我的渝康码</h3>
-      <h3 class="name">{{ hname }}</h3>
+      <h3 class="name">{{ this.hname }}</h3>
       <h3 class="link">关于渝康码<span>|</span>渝康码管理</h3>
       <!-- 二维码图 -->
       <div class="qrcode">
-        <img src="../assets/yimiao.png" alt="" class="img" />
         <iframe
           :src="reportUrl"
           frameborder="0"
@@ -14,9 +13,10 @@
           id="iframeBox"
           class="iframe"
         ></iframe>
-        <div class="num">
-          <span>{{ arr[0] }}</span> <span>{{ arr[1] }}</span>
-        </div>
+        <img src="../assets/yimiao.png" alt="" class="img" />
+      </div>
+      <div class="num">
+        <span>{{ arr[0] }}</span> <span>{{ arr[1] }}</span>
       </div>
     </div>
     <div class="mid">
@@ -47,7 +47,9 @@
     </div>
   </div>
 </template>
+
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -55,17 +57,10 @@ export default {
       reportUrl: "/qrcode.html",
       time: "",
       Time: "",
-      arr: [],
-      hname: "名字",
+      arr: ["1000", "2000"],
     };
   },
   mounted() {
-    this.url = "/public/qrcode.html";
-    for (let i = 0; i < 2; i++) {
-      var a = Math.floor(Math.random().toFixed(4) * 10000);
-      this.arr.push(a);
-    }
-
     this.time = new Date();
     let y = this.time.getYear() - 100;
     let m = this.time.getMonth() + 1;
@@ -74,6 +69,14 @@ export default {
     let M = this.time.getMinutes();
     let s = this.time.getSeconds();
     this.Time = `20${y}/${m}/${d} ${h}:${M}:${s}`;
+  },
+  computed: {
+    ...mapState(["hname", "hID_", "hphone"]),
+  },
+  created() {
+    let ss = window.sessionStorage;
+    let hphone = this.hphone;
+    ss.setItem("hphone", hphone);
   },
 };
 </script>
@@ -86,7 +89,8 @@ export default {
 .qrcode {
   position: relative;
   margin: 0 auto;
-  border: 10px solid #fffb16;
+  border: 10px solid #ffc400;
+  box-shadow: 0px 0px 10px #ffc400;
   border-radius: 10px;
   width: 184px;
   height: 184px;
@@ -105,9 +109,10 @@ export default {
   left: 2px;
 }
 .num {
+  text-align: center;
   margin: 5px auto;
   font-size: 1.5em;
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 h3 {
   text-align: center;
@@ -116,7 +121,8 @@ h3 {
   color: #fefefe;
   border-top: 1px solid transparent;
   height: 67.09vh;
-  background-color: rgb(64, 133, 232);
+  background-image: linear-gradient(to right, rgb(24, 120, 255) , rgb(87, 157, 255));
+  /* background-color: rgb(64, 133, 232); */
   border-bottom: 2px solid rgb(80, 150, 234);
 }
 .mid {
@@ -163,7 +169,7 @@ h3 {
 }
 .name {
   font-size: 1.75em;
-  margin-top: 7.5vh;
+  margin-top: 2vh;
   margin-bottom: 2.63vh;
 }
 .link span {
