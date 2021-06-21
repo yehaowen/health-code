@@ -83,9 +83,6 @@ export default {
             })
         }
     },
-    computed:{
-        ...mapState(["hname", "hID"]),
-    }
 }
 </script>
 
