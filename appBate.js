@@ -106,8 +106,53 @@ server.post('/sn', (req, res,next) => {
   });
 });
 
+//高危城市查询 rcity 表
+server.post('/rcity',(req,res,next)=>{
 
+	let rcn=req.body.rcn;
 
+	let sql='SELECT rcn FROM rcity where rcn=?';
+
+	pool.query(sql,[rcn],(error,results)=>{
+	
+		if(error){
+			next(error);
+			return
+		}
+		if(results.length == 0){
+		res.send({
+		
+			message:'search failed',
+		
+			code:201
+		})
+		}else{
+		
+			res.send({message:'ok',code:200,result:results})	 
+		}
+	})
+
+});
+ 
+//查询高危城市接口 city表
+server.post('/city', (req, res,next) => {
+  //解析手机号
+  let hphone = req.body.hphone;
+ 
+  // SQL语句 user表
+  let sql = 'SELECT hname,hsex FROM healthinfo WHERE hphone=?';
+  pool.query(sql, [hphone], (error, results) => {
+    if (error){
+      next(error);
+      return;
+    }
+    if(results.length == 0){ //查询失败
+      res.send({message:'search failed',code:201});
+    } else {                 //查询成功
+      res.send({message:'ok',code:200,result:results});
+    }
+  });
+});
 
 
 //用户注册接口

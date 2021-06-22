@@ -34,6 +34,7 @@ CREATE TABLE user(
 
 );
 
+
 #插入数据到user
 INSERT INTO user VALUES 
 
@@ -49,6 +50,16 @@ INSERT INTO user VALUES
 
 (NULL,'lh','罗涵','123456','500109199308300016','13983111506','中国',DEFAULT);
 
+#创建高危城市表 rcity
+
+CREATE TABLE rcity(
+	rid INT PRIMARY KEY AUTO_INCREMENT, 
+
+	rcn VARCHAR(64) COMMENT '高危城市名称'
+ 
+);
+
+INSERT INTO rcity VALUES(NULL,'广西');
 
 #创建接种详情页 vd 
 
